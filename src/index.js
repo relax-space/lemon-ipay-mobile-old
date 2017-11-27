@@ -9,6 +9,7 @@ const app = dva();
 
 // 3. Model
 app.model(require('./models/keyBoard'));
+app.model(require("./models/pay"));
 
 // 4. Router
 app.router(require('./router'));

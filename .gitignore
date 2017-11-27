@@ -1,14 +1,11 @@
-# Binaries for programs and plugins
-*.exe
-*.dll
-*.so
-*.dylib
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Test binary, build with `go test -c`
-*.test
+# dependencies
+/node_modules
 
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+# production
+/dist
 
-# Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
-.glide/
+# misc
+.DS_Store
+npm-debug.log*

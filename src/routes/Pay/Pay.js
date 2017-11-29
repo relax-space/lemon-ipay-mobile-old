@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './Pay.css';
+import CustomKeyBoardComponent from '../../components/CustomKeyBoard';
 
-function Pay({ pay, dispatch }) {
+function Pay({ pay,amt, dispatch }) {
     function fn_a(v) {
         console.log(v)
         dispatch({
@@ -29,23 +30,26 @@ function Pay({ pay, dispatch }) {
         const openId = "os2u9uPKLkCKL08FwCM6hQAQ_LtI";
         return (
             <div className={styles.divMain} >
-                <div ><input className={styles.payInput} value={pay.payAmt} onChange={e => fn_a(e.target.value)} placeholder='支付金额' /></div>
+                <div ><input className={styles.payInput} value={amt} onChange={e => fn_a(e.target.value)} placeholder='支付金额' /></div>
                 <button className={styles.paybtn} onClick={() => fn_pay(pay.payAmt, openId)} >支付</button>
+                <CustomKeyBoardComponent />
             </div>
         );
     } else {
         const openId = "os2u9uPKLkCKL08FwCM6hQAQ_LtI";
         return (
             <div className={styles.divMain} >
-                <div ><input className={styles.payInput} value={pay.payAmt} onChange={e => fn_a(e.target.value)} placeholder='支付金额' /></div>
+                <div ><input className={styles.payInput} value={amt} onChange={e => fn_a(e.target.value)} placeholder='支付金额' /></div>
                 <button className={styles.paybtn} onClick={() => fn_pay(pay.payAmt, openId)} >支付</button>
+                <CustomKeyBoardComponent />
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return { pay: state.pay };
+    const { amt } = state.customKeyBoard;
+    return { pay: state.pay,amt };
 }
 
 export default connect(mapStateToProps)(Pay);

@@ -15,10 +15,10 @@ export default {
     },
     effects: {
         *prePay({ payload: { eid = 1, payAmt, type } }, { call, put, select }) {
-            payAmt = parseFloat(payAmt) * 100;
+            payAmt = parseFloat(payAmt);
             if (type == 'wx') {
                 let myUrl = encodeURIComponent(backendAddr.myUrl)
-                let prepayParam = { "page_url": myUrl, "e_id": eid, "body": "xiaomiao test", "total_fee": payAmt, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl }
+                let prepayParam = { "page_url": myUrl, "e_id": eid, "body": "xiaomiao test", "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl }
                 window.location = backendAddr.wxPrepay + '?&prepay_param=' + JSON.stringify(prepayParam);
             } else {
                 const { data } = yield call(payService.prepay, { eid, payAmt, type });
@@ -84,6 +84,7 @@ export default {
                 WeixinJSBridge.invoke(
                     'getBrandWCPayRequest',
                     {
+                        appId: param.appId,
                         timestamp: param.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
                         nonceStr: param.nonceStr, // 支付签名随机串，不长于 32 位
                         package: param.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）

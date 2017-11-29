@@ -9,6 +9,7 @@ function RouterConfig({ history }) {
     <Router history={history}>
       <Switch>
         <Route path="/" exact component={CustomKeyBoard} />
+        <Route path="/keyBoard" exact component={KeyBoard} />
         <Route path="/pay" exact component={Pay} />
       </Switch>
     </Router>

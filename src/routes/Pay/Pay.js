@@ -56,6 +56,7 @@ function Pay({ pay, amt, dispatch }) {
     } else if (UA.match(/MicroMessenger\//i)) {
 
         let cookie = getCookie('IPAY_WECHAT_PREPAY');
+       //cookie='%7B%22appId%22%3A%22wx856df5e42a345096%22%2C%22nonceStr%22%3A%22XXUfypDLZrZELzI4%22%2C%22package%22%3A%22prepay_id%3Dwx20171130144118c840f467f60672200485%22%2C%22pay_sign%22%3A%228B7F646341AF4A7B8F206569ECA66D7A%22%2C%22signType%22%3A%22MD5%22%2C%22timeStamp%22%3A%221512024078%22%7'
         if (cookie) {
             fn_Pay(JSON.parse(decodeURIComponent(cookie)), 'wx');
             return (

@@ -114,7 +114,7 @@ export default {
                         } else if (res.errMsg == "get_brand_wcpay_request:cancel") {
                             alert("支付取消");
                         } else {
-                            alert("支付失败:" + res.errMsg, "cancel");
+                            alert("支付失败:" +JSON.stringify(res));
                         }
                         //alert(res.err_code + "||" + res.err_desc + "||" + res.err_msg);
                     }

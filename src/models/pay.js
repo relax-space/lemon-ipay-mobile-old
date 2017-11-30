@@ -45,7 +45,6 @@ export default {
             // return { ...state, current: state.current - 1};   
             let url = window.location.href;
             const { data } = yield call(payService.getToken);
-
             let token=data.result.api_Ticket;
             //url='https://ipay.p2shop.cn/';
             url=location.href.split('#')[0]
@@ -77,7 +76,7 @@ export default {
                         console.log(res);
                     },
                     complete: function () {
-                  //      deleteAllCookies();
+                       deleteAllCookies();
                     }
                 });
             });

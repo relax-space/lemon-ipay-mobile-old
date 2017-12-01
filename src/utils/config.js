@@ -13,21 +13,21 @@ export const backendAddr = (() => {
     case 'staging': return {
       wxPrepay: 'https://staging.p2shop.cn/ipay/v3/wx/prepayeasy',
       alPrepay: 'https://staging.p2shop.cn/ipay/v3/al/prepay',
-      myUrl: 'https://ipay-staging.p2shop.cn/%v?#/pay',
+      myUrl: 'https://ipay-staging.p2shop.cn/#/pay',
       notifyUrl: 'https://staging.p2shop.cn/ipay/v3/wx/notify',
       tokenUrl:'https://gateway.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
     };
     case 'production': return {
       wxPrepay: 'https://gateway.p2shop.cn/ipay/v3/wx/prepayeasy',
       alPrepay: 'https://gateway.p2shop.cn/ipay/v3/al/prepay',
-      myUrl: 'https://ipay.p2shop.cn/%v?#/pay',
+      myUrl: 'https://ipay.p2shop.cn/#/pay',
       notifyUrl: 'https://gateway.p2shop.cn/ipay/v3/wx/notify',
       tokenUrl:'https://gateway.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
     };
     default: return {
       wxPrepay: 'https://gateway.p2shop.cn/ipay/v3/wx/prepayeasy',
       alPrepay: 'https://gateway.p2shop.cn/ipay/v3/al/prepay',
-      myUrl: 'https://ipay.p2shop.cn/%v?#/pay',//'http://www.baidu.com',//
+      myUrl: 'https://ipay.p2shop.cn/#/pay',//'http://www.baidu.com',//
       notifyUrl: 'https://gateway.p2shop.cn/ipay/v3/wx/notify',
       tokenUrl:'https://gateway.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
     };

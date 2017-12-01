@@ -33,6 +33,7 @@ export default {
     },
     production: {
       extraBabelPlugins: [
+        'dva-hmr',
         'transform-runtime',
         [
           'import',

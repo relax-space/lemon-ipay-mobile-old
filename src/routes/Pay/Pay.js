@@ -5,18 +5,6 @@ import CustomKeyBoardComponent from '../../components/CustomKeyBoard';
 import { List, Toast, InputItem } from 'antd-mobile';
 
 function Pay({ pay, amt, dispatch }) {
-    function GetRequest() {
-        var url = location.hash; //获取url中"?"符后的字串   
-        var theRequest = new Object();
-        if (url.indexOf("?") != -1) {
-          var str = url.substr(3);
-          var strs = str.split("&");
-          for (var i = 0; i < strs.length; i++) {
-            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-          }
-        }
-        return theRequest;
-      }
     function fn_a(v) {
         //验证金额输入规则
         if (v && !/^(([1-9]\d*)|0)(\.\d{0,2}?)?$/.test(v)) {
@@ -36,25 +24,14 @@ function Pay({ pay, amt, dispatch }) {
             payload: { payAmt: v },
         });
     }
-    // function fn_Prepay(payAmt, type) {
-    //     if (!payAmt || !/(^[1-9]\d*(\.\d{0,2})?$)|(^\d(\.\d{0,2})?$)/.test(payAmt)) {
-    //         Toast.info("请输入正确的金额");
-    //         return;
-    //     }
-    //     dispatch({
-    //         type: 'pay/prePay',
-    //         payload: { eid: 10001, payAmt, type },
-    //     });
-    // }
     function fn_Prepay(payAmt, type) {
-        let eid=GetRequest().e_id
         if (!payAmt || !/(^[1-9]\d*(\.\d{0,2})?$)|(^\d(\.\d{0,2})?$)/.test(payAmt)) {
             Toast.info("请输入正确的金额");
             return;
         }
         dispatch({
             type: 'pay/prePay',
-            payload: { eid: eid, payAmt, type },
+            payload: { eid: 10001, payAmt, type },
         });
     }
     function fn_Pay(param, type) {

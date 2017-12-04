@@ -21,6 +21,7 @@ export default {
     },
     staging: {
       extraBabelPlugins: [
+        'dva-hmr',
         'transform-runtime',
         [
           'import',

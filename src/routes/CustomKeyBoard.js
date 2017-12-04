@@ -4,11 +4,10 @@ import styles from './CustomKeyBoard.css';
 import CustomKeyBoardComponent from '../components/CustomKeyBoard';
 
 function CustomKeyBoard({amt}) {
+  // <div ><input className={styles.payInput} value={amt} placeholder='支付金额' /></div>
   return (
     <div>
-        <div ><input className={styles.payInput} value={amt} placeholder='支付金额' /></div>
-
-        <CustomKeyBoardComponent />
+      <CustomKeyBoardComponent />
     </div>
   );
 }

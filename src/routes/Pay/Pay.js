@@ -24,14 +24,14 @@ function Pay({ pay, amt, dispatch }) {
             payload: { payAmt: v },
         });
     }
-    function fn_Prepay(payAmt, type) {
+    function fn_Prepay(eid,payAmt, type) {
         if (!payAmt || !/(^[1-9]\d*(\.\d{0,2})?$)|(^\d(\.\d{0,2})?$)/.test(payAmt)) {
             Toast.info("请输入正确的金额");
             return;
         }
         dispatch({
             type: 'pay/prePay',
-            payload: { eid: 10001, payAmt, type },
+            payload: { eid: eid, payAmt, type },
         });
     }
     function fn_Pay(param, type) {
@@ -46,17 +46,26 @@ function Pay({ pay, amt, dispatch }) {
         if (parts.length == 2) return parts.pop().split(";").shift();
     }
     let UA = navigator.userAgent;
+    let url = location.href;
+    let UrlArr = url.split('?');
+    let eid = 10001;
+    if (UrlArr.length > 1) {
+        let paramArr = UrlArr[1].split('&');
+        if (paramArr.length > 0 && paramArr[0].toLowerCase().indexOf('eid') > -1) {
+            let payParamArr = paramArr[0].split('=');
+            eid = ((payParamArr[1]));
+        }
+    }
     if (UA.match(/Alipay/i)) {
         return (
             <div className={styles.divMain} >
-                <input className={styles.payInput}  type="number" placeholder="金额￥" value={pay.payAmt} onChange={e => fn_a(e.target.value)} />
-                <button className={styles.paybtn} onClick={() => fn_Prepay(pay.payAmt, 'al')} >支付</button>
+                <input className={styles.payInput} type="number" placeholder="金额￥" value={pay.payAmt} onChange={e => fn_a(e.target.value)} />
+                <button className={styles.paybtn} onClick={() => fn_Prepay(eid,pay.payAmt, 'al')} >支付</button>
             </div>
         );
     } else if (UA.match(/MicroMessenger\//i)) {
-
         let cookie = getCookie('IPAY_WECHAT_PREPAY');
-       //cookie='%7B%22appId%22%3A%22wx856df5e42a345096%22%2C%22nonceStr%22%3A%22XXUfypDLZrZELzI4%22%2C%22package%22%3A%22prepay_id%3Dwx20171130144118c840f467f60672200485%22%2C%22pay_sign%22%3A%228B7F646341AF4A7B8F206569ECA66D7A%22%2C%22signType%22%3A%22MD5%22%2C%22timeStamp%22%3A%221512024078%22%7'
+        //cookie='%7B%22appId%22%3A%22wx856df5e42a345096%22%2C%22nonceStr%22%3A%22XXUfypDLZrZELzI4%22%2C%22package%22%3A%22prepay_id%3Dwx20171130144118c840f467f60672200485%22%2C%22pay_sign%22%3A%228B7F646341AF4A7B8F206569ECA66D7A%22%2C%22signType%22%3A%22MD5%22%2C%22timeStamp%22%3A%221512024078%22%7'
         if (cookie) {
             fn_Pay(JSON.parse(decodeURIComponent(cookie)), 'wx');
             return (
@@ -68,7 +77,7 @@ function Pay({ pay, amt, dispatch }) {
                 <list>
                     <InputItem type="money" placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} >金额</InputItem>
                 </list>
-                <button className={styles.paybtn} onClick={() => fn_Prepay(pay.payAmt, 'wx')} >支付</button>
+                <button className={styles.paybtn} onClick={() => fn_Prepay(eid,pay.payAmt, 'wx')} >支付</button>
             </div>
         );
 
@@ -82,7 +91,7 @@ function Pay({ pay, amt, dispatch }) {
     } else {
         return (
             <div className={styles.divMain} >
-                <input  className={styles.payInput}  type="number" placeholder="金额￥" value={pay.payAmt} onChange={e => fn_a(e.target.value)} />
+                <input className={styles.payInput} type="number" placeholder="金额￥" value={pay.payAmt} onChange={e => fn_a(e.target.value)} />
                 <button className={styles.paybtn} onClick={() => fn_Prepay(pay.payAmt, 'al')} >支付</button>
             </div>
         );

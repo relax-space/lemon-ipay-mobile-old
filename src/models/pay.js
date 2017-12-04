@@ -19,7 +19,7 @@ export default {
             payAmt = parseFloat(payAmt);
             if (type == 'wx') {
                 let myUrl = encodeURIComponent(backendAddr.myUrl)
-                let prepayParam = {  "attach":{ "e_id": eid}, "page_url": myUrl, "e_id": eid, "body": "xiaomiao test", "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl }
+                let prepayParam = {  "attach":JSON.stringify({ "e_id": eid}), "page_url": myUrl, "e_id": eid, "body": "xiaomiao test", "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl }
                 window.location = backendAddr.wxPrepay + '?&prepay_param=' + JSON.stringify(prepayParam);
             } else {
                 const { data } = yield call(payService.prepay, { eid, payAmt, type });

@@ -59,7 +59,7 @@ function Pay({ pay, amt, dispatch }) {
     if (UA.match(/Alipay/i)) {
         return (
             <div className={styles.divMain} >
-                <InputItem type="number" step="0.01" min="0" style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+                <InputItem type="text"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
                 <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'al')} >Pay</button>
             </div>
         );
@@ -74,8 +74,8 @@ function Pay({ pay, amt, dispatch }) {
         }
         return (
             <div className={styles.divMain} >
-                <InputItem type="number" step="0.01" min="0" style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
 
+                <InputItem type="text"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
                 <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'wx')} >Pay</button>
             </div>
         );
@@ -90,7 +90,7 @@ function Pay({ pay, amt, dispatch }) {
     } else {
         return (
             <div className={styles.divMain} >
-                <InputItem type="number" step="0.01" min="0" style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+                <InputItem type="text"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
 
                 <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'al')} >Pay</button>
             </div>

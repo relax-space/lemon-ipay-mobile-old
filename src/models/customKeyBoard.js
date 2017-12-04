@@ -9,7 +9,7 @@ export default {
       },
     },
     effects: {
-        *itemClick({ payload: {amt,val} }, { call, put }) {
+        *itemClick({ payload: {amt,val,type} }, { call, put }) {
             var newAmt=amt;
 
             switch (val) {
@@ -18,6 +18,7 @@ export default {
                     break;
                 case 'c':
                 case 'h':
+                alert('支付成功!'+type)
                     break;
                 case '.':
                     var indexDot = amt.indexOf('.');
@@ -43,7 +44,7 @@ export default {
                     break;
               } 
             
-              if(newAmt > 2000){
+              if(newAmt > 10000000){
                   newAmt = amt;
               }
             

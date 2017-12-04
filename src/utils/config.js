@@ -8,7 +8,7 @@ export default {
 };
 
 export const backendAddr = (() => {
-  const env = process.env.REACT_APP_ENV
+  const env = process.env.API_ENV
   switch (env) {
     case 'staging': return {
       wxPrepay: 'https://staging.p2shop.cn/ipay/v3/wx/prepayeasy',

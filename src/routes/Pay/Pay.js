@@ -6,29 +6,29 @@ import { List, Toast, InputItem } from 'antd-mobile';
 
 function Pay({ pay, amt, dispatch }) {
     function fn_a(v) {
-        //验证金额输入规则
-        if (v && !/^(([1-9]\d*)|0)(\.\d{0,2}?)?$/.test(v)) {
-            if (v === '.') {
-                v = '0.';
-            }
-            else {
-                return;
-            }
-        }
-        if (parseFloat(v) > 2000) {
-            Toast.info('金额过大！');
-            return;
-        }
+        // //验证金额输入规则
+        // if (v && !/^(([1-9]\d*)|0)(\.\d{0,2}?)?$/.test(v)) {
+        //     if (v === '.') {
+        //         v = '0.';
+        //     }
+        //     else {
+        //         return;
+        //     }
+        // }
+        // if (parseFloat(v) > 2000) {
+        //     Toast.info('金额过大！');
+        //     return;
+        // }
         dispatch({
             type: 'pay/changeAmt',
             payload: { payAmt: v },
         });
     }
-    function fn_Prepay(eid,payAmt, type) {
-        if (!payAmt || !/(^[1-9]\d*(\.\d{0,2})?$)|(^\d(\.\d{0,2})?$)/.test(payAmt)) {
-            Toast.info("请输入正确的金额");
-            return;
-        }
+    function fn_Prepay(eid, payAmt, type) {
+        // if (!payAmt || !/(^[1-9]\d*(\.\d{0,2})?$)|(^\d(\.\d{0,2})?$)/.test(payAmt)) {
+        //     Toast.info("请输入正确的金额");
+        //     return;
+        // }
         dispatch({
             type: 'pay/prePay',
             payload: { eid: eid, payAmt, type },
@@ -59,8 +59,8 @@ function Pay({ pay, amt, dispatch }) {
     if (UA.match(/Alipay/i)) {
         return (
             <div className={styles.divMain} >
-                <input className={styles.payInput} type="number" placeholder="金额￥" value={pay.payAmt} onChange={e => fn_a(e.target.value)} />
-                <button className={styles.paybtn} onClick={() => fn_Prepay(eid,pay.payAmt, 'al')} >支付</button>
+                <InputItem type="number" style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+                <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'al')} >Pay</button>
             </div>
         );
     } else if (UA.match(/MicroMessenger\//i)) {
@@ -74,10 +74,9 @@ function Pay({ pay, amt, dispatch }) {
         }
         return (
             <div className={styles.divMain} >
-                <list>
-                    <InputItem type="money" placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} >金额</InputItem>
-                </list>
-                <button className={styles.paybtn} onClick={() => fn_Prepay(eid,pay.payAmt, 'wx')} >支付</button>
+                <InputItem type="number" style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+
+                <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'wx')} >Pay</button>
             </div>
         );
 
@@ -91,8 +90,9 @@ function Pay({ pay, amt, dispatch }) {
     } else {
         return (
             <div className={styles.divMain} >
-                <input className={styles.payInput} type="number" placeholder="金额￥" value={pay.payAmt} onChange={e => fn_a(e.target.value)} />
-                <button className={styles.paybtn} onClick={() => fn_Prepay(pay.payAmt, 'al')} >支付</button>
+                <InputItem type="number" style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+
+                <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'al')} >Pay</button>
             </div>
         );
     }

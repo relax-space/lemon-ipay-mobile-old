@@ -1,3 +1,28 @@
   .fontSize25{
     font-size: 25.5px;
   }
+  .divInput{
+     margin:10px;
+     border:1px solid #31b932;
+     border-radius:5px;
+     height:40px;
+     line-height:40px;
+    font-size: 25.5px;
+    position:relative;
+  }
+  .spanLabel{
+    margin-left:5px;
+    font-size: 20px;
+    color:#bebebe;
+    
+  }
+  .spanSymbel{
+    float:right;
+    color:#bebebe;
+    font-weight: bold;
+  }
+  .spanAmt{
+    float:right;
+  }
+
+

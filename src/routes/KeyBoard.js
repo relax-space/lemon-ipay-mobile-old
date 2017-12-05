@@ -10,6 +10,13 @@ function KeyBoard() {
   );
 }
 
+if ('addEventListener' in document) {
+  window.addEventListener('load', function () {
+    var FastClick = require('fastclick');
+    FastClick.attach(document.body)
+  }, false)
+}
+
 KeyBoard.propTypes = {
 };
 

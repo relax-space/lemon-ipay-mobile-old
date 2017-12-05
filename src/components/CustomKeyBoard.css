@@ -24,5 +24,17 @@
   .spanAmt{
     float:right;
   }
+  .am-number-keyboard-item a:active{
+    background-color: yellow;
+  }
+  .btn{
+    display: inline-block;
+    width: 100%;
+    height:100%;
+    line-height: 50px;
+  }
+  .btn:active{
+    background-color:#eee;
+  }
 
 

@@ -59,7 +59,7 @@ function Pay({ pay, amt, dispatch }) {
     if (UA.match(/Alipay/i)) {
         return (
             <div className={styles.divMain} >
-                <InputItem type="text"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+                <InputItem type="money"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
                 <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'al')} >Pay</button>
             </div>
         );
@@ -75,7 +75,7 @@ function Pay({ pay, amt, dispatch }) {
         return (
             <div className={styles.divMain} >
 
-                <InputItem type="text"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+                <InputItem type="money"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
                 <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'wx')} >Pay</button>
             </div>
         );
@@ -90,7 +90,7 @@ function Pay({ pay, amt, dispatch }) {
     } else {
         return (
             <div className={styles.divMain} >
-                <InputItem type="text"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+                <InputItem type="money"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
 
                 <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'al')} >Pay</button>
             </div>
@@ -102,5 +102,12 @@ function mapStateToProps(state) {
     const { amt } = state.customKeyBoard;
     return { pay: state.pay, amt };
 }
+
+if ('addEventListener' in document) {
+    window.addEventListener('load', function () {
+      var FastClick = require('fastclick');
+      FastClick.attach(document.body)
+    }, false)
+  }
 
 export default connect(mapStateToProps)(Pay);

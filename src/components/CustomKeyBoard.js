@@ -6,6 +6,7 @@ import styles from './CustomKeyBoard.css';
 import cs from 'classnames'//引入classnames依赖库
 
 function CustomKeyBoard({dispatch, amt }) {
+
     function keyBoardItemClickHandler(el, op) {
         var val = '';
         if (op == undefined) {
@@ -13,18 +14,21 @@ function CustomKeyBoard({dispatch, amt }) {
         } else {
             val = op;
         }
+
         if (val == 'c') {
             dispatch({
                 type: 'pay/prePay',
-                payload: { eid: eid, payAmt:amt, type },
+                payload: { eid: eid, payAmt: amt, type },
             });
-        } else {
+        }
+        else {
             dispatch({
                 type: 'customKeyBoard/itemClick',
                 payload: { amt, val },
             });
         }
     }
+    let newAmt = '';
     function getCookie(name) {
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
@@ -55,7 +59,7 @@ function CustomKeyBoard({dispatch, amt }) {
         type = 'wx';
     }
     else {
-        type = 'al';
+        type = 'wx';
     }
     return (
         <div className={styles.normal}>
@@ -65,29 +69,29 @@ function CustomKeyBoard({dispatch, amt }) {
                 <span className={styles.spanSymbel}>￥</span>
             </div>
             <div id="am-number-keyboard-container">
-                <div data-reactroot="" className={cs({ 'am-number-keyboard-wrapper': true })}>
+                <div data-reactroot="" className={cs({'am-number-keyboard-wrapper': true })}>
                     <table>
                         <tbody>
                             <tr>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>1</td>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>2</td>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>3</td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>1</a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>2</a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>3</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this, null, 'd')} className={cs({ "am-number-keyboard-item": true, "keyboard-delete": true })} rowSpan="2"></td>
                             </tr>
                             <tr>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>4</td>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>5</td>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>6</td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>4</a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>5</a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>6</a></td>
                             </tr>
                             <tr>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>7</td>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>8</td>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>9</td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>7</a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>8</a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>9</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this, null, 'c')} className={cs({ "am-number-keyboard-item": true, "keyboard-confirm": true })} rowSpan="2">支付</td>
                             </tr>
                             <tr>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>.</td>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}>0</td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>.</a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>0</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this, null, 'h')} className={cs({ "am-number-keyboard-item": true, "keyboard-hide": true })}></td>
                             </tr>
                         </tbody>

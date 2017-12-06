@@ -28,7 +28,7 @@ export function prepay({ eid = 1, payAmt, type}) {
                     "e_id": eid,
                     "subject": "xiaomiao test ali",
                     "total_amount": payAmt,
-                    "notify_url":backendAddr.alNotifyUrl
+                    "notify_url":encodeURIComponent(backendAddr.alNotifyUrl)
                 })
             }
         );

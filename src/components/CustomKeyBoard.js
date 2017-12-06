@@ -6,6 +6,8 @@ import styles from './CustomKeyBoard.css';
 import cs from 'classnames'//引入classnames依赖库
 import { List, Toast, InputItem } from 'antd-mobile';
 
+
+
 function CustomKeyBoard({ dispatch, amt, uaType }) {
 
     function keyBoardItemClickHandler(el, op) {
@@ -83,6 +85,8 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
     }
     let imgsrc = GetQueryString('logo') || 'https://tfsimg.alipay.com/images/openhome/T1GT0qXeBXXXaCwpjX.png';
     return (
+
+        
         <div className={styles.normal}>
             <div className={styles.topDiv} >
                 <img className={styles.logo} src={imgsrc} />
@@ -92,31 +96,31 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
                 <span className={styles.shopName}>{title}</span>
             </div>
             <div className={uaType == "wx" ? styles.divInputWX : styles.divInputAL}>
-                <span className={styles.spanLabel}>支付金额</span>
+                <span className={styles.spanLabel}>消费金额</span>
                 <span className={uaType == "wx" ? styles.heartWX : styles.heartAL}>|</span>
                 <span className={styles.spanAmt}>{amt}</span>
-                <span className={styles.spanSymbel}>￥</span>
+                <span className={styles.spanSymbel}>&yen;&nbsp;</span>
             </div>
-            <div id="am-number-keyboard-container">
-                <div data-reactroot="" className={cs({ 'am-number-keyboard-wrapper': true })}>
+            <div id="am-number-keyboard-container" >
+                <div data-reactroot="" className={cs({ 'am-number-keyboard-wrapper': true})} style={{"height":"240px"}} >
                     <table>
                         <tbody>
                             <tr>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>1</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>2</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>3</a></td>
-                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'd')} className={cs({ 'am-number-keyboard-item': true })} rowSpan="2"><a className={styles.btnD}><img src={require('../assets/backspace.png')} /></a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'd')} className={cs({ 'am-number-keyboard-item': true })} rowSpan="1"><a className={styles.btnD}><img src={require('../assets/backspace.png')} /></a></td>
                             </tr>
                             <tr>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>4</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>5</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>6</a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'c')} rowSpan="3"><a className={uaType == "wx" ? styles.btnWX : styles.btnAL}>支付</a></td>
                             </tr>
                             <tr>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>7</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>8</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>9</a></td>
-                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'c')} rowSpan="2"><a className={uaType == "wx" ? styles.btnWX : styles.btnAL}>支付</a></td>
                             </tr>
                             <tr>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>.</a></td>

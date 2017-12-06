@@ -23,22 +23,22 @@
 
   .divInputAL{
      margin:10px;
-     margin-top: 0;
      padding: 5px;
      border:1px solid #108ee9;
      border-radius:5px;
      /* height:40px; */
      line-height:45px;
-    font-size: 35px;
-    position:relative;
+     font-size: 35px;
+     position:relative;
   }
   .divInputWX{
-  margin:10px;
+     margin:10px;
+     padding: 5px;
      border:1px solid #31b932;
      border-radius:5px;
      /* height:40px; */
-     line-height:40px;
-    font-size: 25.5px;
+     line-height:45px;
+     font-size: 35px;
     position:relative;
   }
   .spanLabel{

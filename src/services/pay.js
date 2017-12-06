@@ -16,7 +16,12 @@ export function prepay({ eid = 1, payAmt, type}) {
             }
         );
     }
-    else if (type == 'al') {
+    else if (type == 'al') {console.log(JSON.stringify({
+        "e_id": eid,
+        "subject": "xiaomiao test ali",
+        "total_amount": payAmt,
+        "notify_url":encodeURIComponent(backendAddr.alNotifyUrl)
+    }))
         return request(backendAddr.alPrepay,
             {
                 method: 'POST',

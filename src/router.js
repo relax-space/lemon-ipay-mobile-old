@@ -10,7 +10,7 @@ function RouterConfig({ history }) {
       <Switch>
         <Route path="/" exact component={CustomKeyBoard} />
         <Route path="/keyBoard" exact component={KeyBoard} />
-        <Route path="/pay" exact component={Pay} />
+        <Route path="/pay" exact component={CustomKeyBoard} />
       </Switch>
     </Router>
   );

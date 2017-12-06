@@ -44,10 +44,18 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
         let search = window.location.href.substr(index + 1)
         let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         let r = search.match(reg);
-        if (r != null) return unescape(r[2]); return null;
+        if (r != null) {
+            try {
+                return decodeURIComponent(r[2]);
+            }
+            catch (e) {
+                return null;
+            }
+        }
+        return null;
     }
     let eid = parseInt(GetQueryString("e_id"));
-    let title = GetQueryString("name") || "柠檬支付";
+    let title = (GetQueryString("name")) || "柠檬支付";
     document.title = title;
     let UA = navigator.userAgent;
     let type = '';
@@ -73,7 +81,7 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
         });
 
     }
-    let imgsrc = GetQueryString('logo')||'https://tfsimg.alipay.com/images/openhome/T1GT0qXeBXXXaCwpjX.png';
+    let imgsrc = GetQueryString('logo') || 'https://tfsimg.alipay.com/images/openhome/T1GT0qXeBXXXaCwpjX.png';
     return (
         <div className={styles.normal}>
             <div className={styles.topDiv} >
@@ -97,7 +105,7 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>1</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>2</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>3</a></td>
-                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'd')} className={cs({ 'am-number-keyboard-item': true })} rowSpan="2"><a className={styles.btnD}><img src={require('../assets/backspace.png')}/></a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'd')} className={cs({ 'am-number-keyboard-item': true })} rowSpan="2"><a className={styles.btnD}><img src={require('../assets/backspace.png')} /></a></td>
                             </tr>
                             <tr>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>4</a></td>

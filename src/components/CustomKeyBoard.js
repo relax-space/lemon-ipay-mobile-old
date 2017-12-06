@@ -4,11 +4,13 @@ import { routerRedux } from 'dva/router';
 import { Button } from 'antd-mobile';
 import styles from './CustomKeyBoard.css';
 import cs from 'classnames'//引入classnames依赖库
+import { List, Toast, InputItem } from 'antd-mobile';
 
-function CustomKeyBoard({dispatch, amt }) {
+function CustomKeyBoard({ dispatch, amt, uaType }) {
 
     function keyBoardItemClickHandler(el, op) {
         var val = '';
+        uaType;
         if (op == undefined) {
             val = el.target.innerHTML;
         } else {
@@ -16,6 +18,10 @@ function CustomKeyBoard({dispatch, amt }) {
         }
 
         if (val == 'c') {
+            if (isNaN(eid)) {
+                Toast.info("预支付失败，商户代码不正常！");
+                return;
+            }
             dispatch({
                 type: 'pay/prePay',
                 payload: { eid: eid, payAmt: amt, type },
@@ -28,22 +34,21 @@ function CustomKeyBoard({dispatch, amt }) {
             });
         }
     }
-    let newAmt = '';
     function getCookie(name) {
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
         if (parts.length == 2) return parts.pop().split(";").shift();
     }
-    let eid = 10001;
-    let url = location.href;
-    let UrlArr = url.split('?');
-    if (UrlArr.length > 1) {
-        let paramArr = UrlArr[1].split('&');
-        if (paramArr.length > 0 && paramArr[0].toLowerCase().indexOf('eid') > -1) {
-            let payParamArr = paramArr[0].split('=');
-            eid = ((payParamArr[1]));
-        }
+    function GetQueryString(name) {
+        let index = window.location.href.indexOf('?');
+        let search = window.location.href.substr(index + 1)
+        let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        let r = search.match(reg);
+        if (r != null) return unescape(r[2]); return null;
     }
+    let eid = parseInt(GetQueryString("e_id"));
+    let title = GetQueryString("name") || "柠檬支付";
+    document.title = title;
     let UA = navigator.userAgent;
     let type = '';
     if (UA.match(/Alipay/i)) {
@@ -59,24 +64,40 @@ function CustomKeyBoard({dispatch, amt }) {
         type = 'wx';
     }
     else {
-        type = 'wx';
+        type = 'al';
     }
+    if (uaType != type) {
+        dispatch({
+            type: 'customKeyBoard/setuaType',
+            payload: { uaType: type },
+        });
+
+    }
+    let imgsrc = GetQueryString('logo')||'https://tfsimg.alipay.com/images/openhome/T1GT0qXeBXXXaCwpjX.png';
     return (
         <div className={styles.normal}>
-            <div className={styles.divInput}>
+            <div className={styles.topDiv} >
+                <img className={styles.logo} src={imgsrc} />
+            </div>
+            <div className={styles.topDiv} >
+                {/* <img className={styles.logo} src={imgsrc} /> */}
+                <span className={styles.shopName}>{title}</span>
+            </div>
+            <div className={uaType == "wx" ? styles.divInputWX : styles.divInputAL}>
                 <span className={styles.spanLabel}>支付金额</span>
+                <span className={uaType == "wx" ? styles.heartWX : styles.heartAL}>|</span>
                 <span className={styles.spanAmt}>{amt}</span>
                 <span className={styles.spanSymbel}>￥</span>
             </div>
             <div id="am-number-keyboard-container">
-                <div data-reactroot="" className={cs({'am-number-keyboard-wrapper': true })}>
+                <div data-reactroot="" className={cs({ 'am-number-keyboard-wrapper': true })}>
                     <table>
                         <tbody>
                             <tr>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>1</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>2</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>3</a></td>
-                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'd')} className={cs({ "am-number-keyboard-item": true, "keyboard-delete": true })} rowSpan="2"></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'd')} className={cs({ 'am-number-keyboard-item': true })} rowSpan="2"><a className={styles.btnD}><img src={require('../assets/backspace.png')}/></a></td>
                             </tr>
                             <tr>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>4</a></td>
@@ -87,7 +108,7 @@ function CustomKeyBoard({dispatch, amt }) {
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>7</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>8</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>9</a></td>
-                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'c')} className={cs({ "am-number-keyboard-item": true, "keyboard-confirm": true })} rowSpan="2">支付</td>
+                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'c')} rowSpan="2"><a className={uaType == "wx" ? styles.btnWX : styles.btnAL}>支付</a></td>
                             </tr>
                             <tr>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>.</a></td>
@@ -103,11 +124,10 @@ function CustomKeyBoard({dispatch, amt }) {
 }
 
 function mapStateToProps(state) {
-    const { amt } = state.customKeyBoard;
-    const { type } = state.pay;
+    const { amt, uaType } = state.customKeyBoard;
 
     return {
-        amt,
+        amt, uaType,
     };
 }
 

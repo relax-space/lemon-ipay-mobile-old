@@ -27,7 +27,8 @@ export function prepay({ eid = 1, payAmt, type}) {
                 body: JSON.stringify({
                     "e_id": eid,
                     "subject": "xiaomiao test ali",
-                    "total_amount": payAmt
+                    "total_amount": payAmt,
+                    "notify_url":backendAddr.alNotifyUrl
                 })
             }
         );

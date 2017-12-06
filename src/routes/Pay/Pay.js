@@ -6,19 +6,19 @@ import { List, Toast, InputItem } from 'antd-mobile';
 
 function Pay({ pay, amt, dispatch }) {
     function fn_a(v) {
-        //验证金额输入规则
-        if (v && !/^(([1-9]\d*)|0)(\.\d{0,2}?)?$/.test(v)) {
-            if (v === '.') {
-                v = '0.';
-            }
-            else {
-                return;
-            }
-        }
-        if (parseFloat(v) > 2000) {
-            Toast.info('金额过大！');
-            return;
-        }
+        // //验证金额输入规则
+        // if (v && !/^(([1-9]\d*)|0)(\.\d{0,2}?)?$/.test(v)) {
+        //     if (v === '.') {
+        //         v = '0.';
+        //     }
+        //     else {
+        //         return;
+        //     }
+        // }
+        // if (parseFloat(v) > 2000) {
+        //     Toast.info('金额过大！');
+        //     return;
+        // }
         dispatch({
             type: 'pay/changeAmt',
             payload: { payAmt: v },
@@ -74,8 +74,8 @@ function Pay({ pay, amt, dispatch }) {
     if (UA.match(/Alipay/i)) {
         return (
             <div className={styles.divMain} >
-                <input className={styles.payInput} type="number" placeholder="金额￥" value={pay.payAmt} onChange={e => fn_a(e.target.value)} />
-                <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'al')} >支付</button>
+                <InputItem type="money"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+                <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'al')} >Pay</button>
             </div>
         );
     } else if (UA.match(/MicroMessenger\//i)) {
@@ -91,17 +91,16 @@ function Pay({ pay, amt, dispatch }) {
         }
         return (
             <div className={styles.divMain} >
-                <list>
-                    <InputItem type="money" placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} >金额</InputItem>
-                </list>
-                <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'wx')} >支付</button>
+                <InputItem type="money"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+                <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'wx')} >Pay</button>
             </div>
         );
     } else {
         return (
             <div className={styles.divMain} >
-                <input className={styles.payInput} type="number" placeholder="金额￥" value={pay.payAmt} onChange={e => fn_a(e.target.value)} />
-                <button className={styles.paybtn} onClick={() => fn_Prepay(pay.payAmt, 'al')} >支付</button>
+                <InputItem type="money"  style={{ "textAlign": "right" }} className={styles.payInput} placeholder="￥" clear value={pay.payAmt} onChange={(v) => fn_a(v)} ></InputItem>
+
+                <button className={styles.paybtn} onClick={() => fn_Prepay(eid, pay.payAmt, 'al')} >Pay</button>
             </div>
         );
     }
@@ -111,5 +110,12 @@ function mapStateToProps(state) {
     const { amt } = state.customKeyBoard;
     return { pay: state.pay, amt };
 }
+
+if ('addEventListener' in document) {
+    window.addEventListener('load', function () {
+      var FastClick = require('fastclick');
+      FastClick.attach(document.body)
+    }, false)
+  }
 
 export default connect(mapStateToProps)(Pay);

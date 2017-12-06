@@ -5,13 +5,13 @@ import sign from '../utils/sign';
 export default {
     namespace: 'pay',
     state: {
-        type:'',
+        uaType:'',
         payAmt: '',
         payResult: 'fail',
     },
     reducers: {
-        save(state, { payload: { payAmt, payResult, openId } }) {
-            return { ...state, payAmt, payResult, openId };
+        save(state, { payload: { payAmt, payResult, uaType } }) {
+            return { ...state, payAmt, payResult, uaType };
         },
     },
     effects: {
@@ -60,7 +60,7 @@ export default {
             });
             wx.error(function (res) {
                 alert(JSON.stringify(res))
-                deleteAllCookies();
+                // deleteAllCookies();
             })
             wx.ready(function () {
                 // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
@@ -78,7 +78,8 @@ export default {
                         console.log(res);
                     },
                     complete: function () {
-                        deleteAllCookies();
+                        // deleteAllCookies();
+                        wx.closeWindow();
                     }
                 });
 

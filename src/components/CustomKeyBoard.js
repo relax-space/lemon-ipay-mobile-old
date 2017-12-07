@@ -72,7 +72,7 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
         }
     }
     let eid = parseInt(GetQueryString("e_id"));
-    let title = (GetQueryString("name")) || "柠檬支付";
+    let title = (GetQueryString("name")) || "北京衣念";
     document.title = title;
     let UA = navigator.userAgent;
     let type = '';
@@ -126,7 +126,7 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>1</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>2</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>3</a></td>
-                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'd')} className={cs({ 'am-number-keyboard-item': true })} rowSpan="1"><a className={styles.btnD}><img src={require('../assets/backspace.png')} /></a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this, null, 'd')} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btnD} ><img style={{"verticalAlign":"middle"}} src={require('../assets/backspace.png')} /></a></td>
                             </tr>
                             <tr>
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>4</a></td>
@@ -140,9 +140,9 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
                                 <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>9</a></td>
                             </tr>
                             <tr>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>.</a></td>
-                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>0</a></td>
                                 <td onClick={keyBoardItemClickHandler.bind(this, null, 'h')} className={cs({ "am-number-keyboard-item": true, "keyboard-hide": true })}></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>0</a></td>
+                                <td onClick={keyBoardItemClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>.</a></td>
                             </tr>
                         </tbody>
                     </table>

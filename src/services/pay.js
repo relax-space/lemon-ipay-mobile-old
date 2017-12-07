@@ -20,7 +20,7 @@ export function prepay({ eid = 1, payAmt, type}) {
         "e_id": eid,
         "subject": "xiaomiao test ali",
         "total_amount": payAmt,
-        "notify_url":encodeURIComponent(backendAddr.alNotifyUrl)
+        "notify_url":backendAddr.alNotifyUrl
     }))
         return request(backendAddr.alPrepay,
             {
@@ -33,7 +33,7 @@ export function prepay({ eid = 1, payAmt, type}) {
                     "e_id": eid,
                     "subject": "xiaomiao test ali",
                     "total_amount": payAmt,
-                    "notify_url":encodeURIComponent(backendAddr.alNotifyUrl)
+                    "notify_url":backendAddr.alNotifyUrl
                 })
             }
         );

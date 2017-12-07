@@ -80,7 +80,7 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
         type = 'al'
     } else if (UA.match(/MicroMessenger\//i)) {
         let cookie = getCookie('IPAY_WECHAT_PREPAY');
-        cookie = '%7B%22appId%22%3A%22wx856df5e42a345096%22%2C%22nonceStr%22%3A%22gyD2VCDRlUIv30Jr%22%2C%22package%22%3A%22prepay_id%3Dwx20171207101857448ec5e35e0054058478%22%2C%22pay_sign%22%3A%223FB3520215D11C9AF8512EED4AD2BF08%22%2C%22signType%22%3A%22MD5%22%2C%22timeStamp%22%3A%221512613137%22%7D'
+        // cookie = '%7B%22appId%22%3A%22wx856df5e42a345096%22%2C%22nonceStr%22%3A%22gyD2VCDRlUIv30Jr%22%2C%22package%22%3A%22prepay_id%3Dwx20171207101857448ec5e35e0054058478%22%2C%22pay_sign%22%3A%223FB3520215D11C9AF8512EED4AD2BF08%22%2C%22signType%22%3A%22MD5%22%2C%22timeStamp%22%3A%221512613137%22%7D'
         type = 'wx';
         if (cookie) {
             fn_Pay(JSON.parse(decodeURIComponent(cookie)), 'wx');

@@ -69,7 +69,7 @@ function Pay({ pay, amt, dispatch }) {
     let url = location.href;
     let UrlArr = url.split('?');
     let eid = parseInt(GetQueryString("e_id"));
-    let title = GetQueryString("name") | '柠檬支付';
+    let title = GetQueryString("name");
 
     if (UA.match(/Alipay/i)) {
         return (

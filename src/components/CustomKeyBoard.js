@@ -36,6 +36,12 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
             });
         }
     }
+    function fn_Pay(param, type) {
+        dispatch({
+            type: 'pay/pay',
+            payload: { param, type },
+        });
+    }
     function getCookie(name) {
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
@@ -56,6 +62,15 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
         }
         return null;
     }
+    function deleteAllCookies() {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;domain=.p2shop.cn;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    }
     let eid = parseInt(GetQueryString("e_id"));
     let title = (GetQueryString("name")) || "柠檬支付";
     document.title = title;
@@ -65,7 +80,7 @@ function CustomKeyBoard({ dispatch, amt, uaType }) {
         type = 'al'
     } else if (UA.match(/MicroMessenger\//i)) {
         let cookie = getCookie('IPAY_WECHAT_PREPAY');
-        //cookie='%7B%22appId%22%3A%22wx856df5e42a345096%22%2C%22nonceStr%22%3A%22XXUfypDLZrZELzI4%22%2C%22package%22%3A%22prepay_id%3Dwx20171130144118c840f467f60672200485%22%2C%22pay_sign%22%3A%228B7F646341AF4A7B8F206569ECA66D7A%22%2C%22signType%22%3A%22MD5%22%2C%22timeStamp%22%3A%221512024078%22%7'
+        cookie = '%7B%22appId%22%3A%22wx856df5e42a345096%22%2C%22nonceStr%22%3A%22gyD2VCDRlUIv30Jr%22%2C%22package%22%3A%22prepay_id%3Dwx20171207101857448ec5e35e0054058478%22%2C%22pay_sign%22%3A%223FB3520215D11C9AF8512EED4AD2BF08%22%2C%22signType%22%3A%22MD5%22%2C%22timeStamp%22%3A%221512613137%22%7D'
         type = 'wx';
         if (cookie) {
             fn_Pay(JSON.parse(decodeURIComponent(cookie)), 'wx');

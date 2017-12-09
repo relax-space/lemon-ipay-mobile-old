@@ -16,23 +16,20 @@ export const backendAddr = (() => {
       alNotifyUrl: 'https://staging.p2shop.cn/ipay/v3/al/notify',
       myUrl: 'https://ipay-staging.p2shop.cn/#/pay',
       notifyUrl: 'https://staging.p2shop.cn/ipay/v3/wx/notify',
-      tokenUrl:'https://staging.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
     };
     case 'production': return {
       wxPrepay: 'https://staging.p2shop.cn/ipay/v3/wx/prepayeasy',
       alPrepay: 'https://staging.p2shop.cn/ipay/v3/al/prepay',
       alNotifyUrl: 'https://staging.p2shop.cn/ipay/v3/al/notify',
-      myUrl: 'https://ipay.p2shop.cn/#/pay',
+      myUrl: 'https://ipay-staging.p2shop.cn/#/pay',
       notifyUrl: 'https://staging.p2shop.cn/ipay/v3/wx/notify',
-      tokenUrl:'https://staging.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
     };
     default: return {
       wxPrepay: 'https://staging.p2shop.cn/ipay/v3/wx/prepayeasy',
       alPrepay: 'https://staging.p2shop.cn/ipay/v3/al/prepay',
       alNotifyUrl: 'https://staging.p2shop.cn/ipay/v3/al/notify',
-      myUrl: 'https://ipay.p2shop.cn/#/pay',//'http://www.baidu.com',//
+      myUrl: 'https://ipay-staging.p2shop.cn/#/pay',//'http://www.baidu.com',//
       notifyUrl: 'https://staging.p2shop.cn/ipay/v3/wx/notify',
-      tokenUrl:'https://staging.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
     };
   }
 })();

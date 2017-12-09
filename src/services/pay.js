@@ -29,7 +29,7 @@ export function prepay({ eid = 1, payAmt, type}) {
                     "subject": "xiaomiao test ali",
                     "total_amount": payAmt,
                     "notify_url":backendAddr.alNotifyUrl,
-                    "body":"e_id="+encodeURIComponent(eid.toString())
+                    "body":"e_id||||"+encodeURIComponent(eid.toString())
                 })
             }
         );

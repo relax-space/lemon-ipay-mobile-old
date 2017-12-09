@@ -5,7 +5,8 @@ import { backendAddr } from '../utils/config';
 export function prepay({ eid = 1, payAmt, type}) {
     if (type == 'wx') {
         let myUrl = encodeURIComponent(backendAddr.myUrl)
-        let prepayParam = { "e_id": eid,"attach":"e_id||||"+encodeURIComponent(eid.toString()), "body": "xiaomiao test", "total_fee": payAmt, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl };
+        let attach =encodeURIComponent("e_id||||"+eid.toString()+"&"+"sub_notify_url||||https://baidu.com")
+        let prepayParam = { "e_id": eid,"attach":attach, "body": "xiaomiao test", "total_fee": payAmt, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl };
         return request(backendAddr.wxPrepay + '?app_id=wx856df5e42a345096&page_url="' + myUrl + '"&prepay_param=' + JSON.stringify(prepayParam),
             {
                 method: 'GET',

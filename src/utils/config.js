@@ -16,23 +16,23 @@ export const backendAddr = (() => {
       alNotifyUrl: 'https://staging.p2shop.cn/ipay/v3/al/notify',
       myUrl: 'https://ipay-staging.p2shop.cn/#/pay',
       notifyUrl: 'https://staging.p2shop.cn/ipay/v3/wx/notify',
-      tokenUrl:'https://gateway.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
+      tokenUrl:'https://staging.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
     };
     case 'production': return {
-      wxPrepay: 'https://gateway.p2shop.cn/ipay/v3/wx/prepayeasy',
-      alPrepay: 'https://gateway.p2shop.cn/ipay/v3/al/prepay',
-      alNotifyUrl: 'https://gateway.p2shop.cn/ipay/v3/al/notify',
+      wxPrepay: 'https://staging.p2shop.cn/ipay/v3/wx/prepayeasy',
+      alPrepay: 'https://staging.p2shop.cn/ipay/v3/al/prepay',
+      alNotifyUrl: 'https://staging.p2shop.cn/ipay/v3/al/notify',
       myUrl: 'https://ipay.p2shop.cn/#/pay',
-      notifyUrl: 'https://gateway.p2shop.cn/ipay/v3/wx/notify',
-      tokenUrl:'https://gateway.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
+      notifyUrl: 'https://staging.p2shop.cn/ipay/v3/wx/notify',
+      tokenUrl:'https://staging.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
     };
     default: return {
-      wxPrepay: 'https://gateway.p2shop.cn/ipay/v3/wx/prepayeasy',
-      alPrepay: 'https://gateway.p2shop.cn/ipay/v3/al/prepay',
-      alNotifyUrl: 'https://gateway.p2shop.cn/ipay/v3/al/notify',
+      wxPrepay: 'https://staging.p2shop.cn/ipay/v3/wx/prepayeasy',
+      alPrepay: 'https://staging.p2shop.cn/ipay/v3/al/prepay',
+      alNotifyUrl: 'https://staging.p2shop.cn/ipay/v3/al/notify',
       myUrl: 'https://ipay.p2shop.cn/#/pay',//'http://www.baidu.com',//
-      notifyUrl: 'https://gateway.p2shop.cn/ipay/v3/wx/notify',
-      tokenUrl:'https://gateway.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
+      notifyUrl: 'https://staging.p2shop.cn/ipay/v3/wx/notify',
+      tokenUrl:'https://staging.p2shop.cn/wx-access-token-api/api/v1/accessToken_Public/1'
     };
   }
 })();

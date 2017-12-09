@@ -5,7 +5,7 @@ import sign from '../utils/sign';
 export default {
     namespace: 'pay',
     state: {
-        uaType:'',
+        uaType: '',
         payAmt: '',
         payResult: 'fail',
     },
@@ -19,8 +19,9 @@ export default {
             payAmt = parseFloat(payAmt);
             if (type == 'wx') {
                 let myUrl = encodeURIComponent(backendAddr.myUrl);
-               // let attach =encodeURIComponent(JSON.stringify({"e_id": eid}));
-                let prepayParam = {"attach":"1111","page_url": myUrl, "e_id": eid, "body": "xiaomiao test", "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl }
+                // let attach =encodeURIComponent(JSON.stringify({"e_id": eid}));
+                let attach = encodeURIComponent("e_id||||" + eid.toString() + "&" + "sub_notify_url||||https://baidu.com")
+                let prepayParam = { "attach": attach, "page_url": myUrl, "e_id": eid, "body": "xiaomiao test", "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl }
                 window.location = backendAddr.wxPrepay + '?&prepay_param=' + JSON.stringify(prepayParam);
             } else {
                 const { data } = yield call(payService.prepay, { eid, payAmt, type });
@@ -42,7 +43,7 @@ export default {
                 },
             });
         },
-        *pay({  payload: {param, type} }, { call, put }) {
+        *pay({ payload: { param, type } }, { call, put }) {
             // return { ...state, current: state.current - 1};   
             let url = window.location.href;
             const { data } = yield call(payService.getToken);
@@ -51,7 +52,7 @@ export default {
             url = location.href.split('#')[0]
             let signature = sign(token, url)
             wx.config({
-                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                //debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: param.appId, // 必填，公众号的唯一标识
                 timestamp: signature.timestamp, // 必填，生成签名的时间戳
                 nonceStr: signature.nonceStr, // 必填，生成签名的随机串

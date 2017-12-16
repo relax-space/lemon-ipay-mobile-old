@@ -8,9 +8,8 @@ const app = dva();
 // app.use({}); 
 
 // 3. Model
-app.model(require('./models/keyBoard'));
-app.model(require('./models/customKeyBoard'));
-app.model(require("./models/pay"));
+app.model(require("./models/keyboard"))
+app.model(require("./models/prepay"));
 
 // 4. Router
 app.router(require('./router'));

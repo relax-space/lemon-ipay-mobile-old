@@ -13,7 +13,7 @@ export default {
         [
           'import',
           {
-            libraryName: 'antd',
+            libraryName: 'antd-mobile',
             style: 'css'
           }
         ]
@@ -21,12 +21,11 @@ export default {
     },
     staging: {
       extraBabelPlugins: [
-        'dva-hmr',
         'transform-runtime',
         [
           'import',
           {
-            libraryName: 'antd',
+            libraryName: 'antd-mobile',
             style: 'css'
           }
         ]

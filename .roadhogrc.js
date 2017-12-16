@@ -21,6 +21,7 @@ export default {
     },
     staging: {
       extraBabelPlugins: [
+        'dva-hmr',
         'transform-runtime',
         [
           'import',
@@ -37,7 +38,7 @@ export default {
         [
           'import',
           {
-            libraryName: 'antd',
+            libraryName: 'antd-mobile',
             style: 'css'
           }
         ]

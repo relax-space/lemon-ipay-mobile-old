@@ -1,5 +1,5 @@
 export default {
-    namespace: 'prepay',
+    namespace: 'testKeyboard',
     state: {
         number: ''
     },

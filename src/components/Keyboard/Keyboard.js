@@ -26,11 +26,15 @@ function Keyboard(props, { number }) {
                 }
                 break
             default:
-                if (indexDot >= 0 && rawNumber.length - indexDot > 2) {
-                    break
+                if (indexDot >= 0 ) {
+                    if( rawNumber.length - indexDot > 2){
+                        break
+                    }else{
+                        newNumber = rawNumber + val
+                        break
+                    }
                 }
-                newNumber = rawNumber + val
-                newNumber=parseFloat(newNumber)+""
+                newNumber=parseFloat(rawNumber + val)+""
                 break
         }
         if (newNumber==""){
@@ -62,7 +66,7 @@ function Keyboard(props, { number }) {
                             <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>5</a></td>
                             <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>6</a></td>
                             <td onClick={() => {
-                                if (props.options.number){
+                                if (props.options.number&&props.options.number!=0){
                                     props.onClick()
                                 }
                              }} rowSpan="3"><a className={props.options.uaType=="wx"?styles.btnWX:styles.btnAL}>{props.options.btnName}</a></td>

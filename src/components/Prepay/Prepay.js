@@ -79,15 +79,14 @@ function Prepay({ dispatch, number, payType, product }) {
         }
     } else if (UA.match(/Alipay/i)) {
         options.uaType = 'al'
+    }else{
+        return (
+            <div></div>
+        )
     }
-    // else{
-    //     return (
-    //         <div></div>
-    //     )
-    // }
 
-    if (!product.e_id) {
-        let product_id = getQueryString("product_id")
+    let product_id = getQueryString("product_id")
+    if (product_id!=null && !product.e_id) {
         dispatch({
             type: "prepay/queryProduct",
             payload: { product_id: product_id, payType: options.uaType }

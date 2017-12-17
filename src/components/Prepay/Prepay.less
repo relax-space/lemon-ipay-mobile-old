@@ -1,0 +1,101 @@
+
+.divInput{
+    margin:20px;
+    padding: 5px;
+    border-radius:5px;
+    height:40px;
+    line-height:45px;
+    font-size: 35px;
+    position:relative;
+ }
+
+.topDiv {
+    padding-top: 30px;
+    padding-bottom: 0px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.logo {
+    margin-left: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.shopName {
+    margin-left: 10px;
+    line-height: 50px;
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.spanLabel {
+    margin-left: 5px;
+    font-size: 20px;
+    vertical-align: bottom;
+    color: #bebebe;
+    font-family: "华文细黑";
+}
+
+.spanLabelSub {
+    margin-left: 5px;
+    font-size: 35px;
+    color: #bebebe;
+    font-family: "华文细黑";
+}
+
+.spanSymbel {
+    float: right;
+    color: #bebebe;
+    font-weight: bold;
+    font-family: "华文细黑";
+}
+
+.spanAmt {
+    float: right;
+}
+.heart{
+  float: right;
+  height: 40px;
+  line-height: 40px;
+  font-size: 25.5px;
+ 
+}
+
+// wx
+.heartWX {
+  &:extend(.heart);
+  animation: heartWX 1s ease infinite;
+}
+@keyframes heartWX {
+  0% {
+      color: #31b932;
+  }
+  100% {
+      color: #eee;
+  }
+}
+.divInputWX{
+    &:extend(.divInput); 
+    border:1px solid #31b932;
+ }
+
+ // al
+
+.heartAL {
+  &:extend(.heart);
+  animation: heartAL 1s ease infinite;
+}
+@keyframes heartAL {
+  0% {
+      color: #108ee9;
+  }
+  100% {
+      color: #eee;
+  }
+}
+.divInputAL{
+    &:extend(.divInput); 
+    border:1px solid #108ee9;
+ }

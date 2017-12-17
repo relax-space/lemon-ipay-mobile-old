@@ -1,35 +1,50 @@
 export default {
-    namespace: 'keyBoard',
+    namespace: 'keyboard',
     state: {
-      list: [],
-      total: null,
-      page: null,
+        number: ''
     },
     reducers: {
-      save(state, { payload: { data: list, total, page } }) {
-        return { ...state, list, total, page };
-      },
+        save(state, { payload: { number } }) {
+            return { ...state, number };
+        },
     },
     effects: {
-      *fetch({ payload: { page = 1 } }, { call, put }) {
-        yield put({
-          type: 'save',
-          payload: {
-            data: undefined,
-            total: parseInt(10, 10),
-            page: parseInt(page, 10),
-          },
-        });
-      },
+        *itemClick({ payload: { val } }, { call, put }) {
+            var rawNumber = this.state.number
+            var newNumber = 0;
+            switch (val) {
+                case 'd':
+                    newNumber = rawNumber.substring(0, rawNumber.length - 1);
+                    break;
+                case 'h':
+                    break;
+                case '.':
+                    var indexDot = rawNumber.indexOf('.');
+                    if (indexDot < 0) {
+                        newNumber = rawNumber + '.';
+                        if (rawNumber == '') {
+                            newNumber = rawNumber + '0.';
+                        }
+                    }
+                    break;
+                default:
+                    var indexDot = rawNumber.indexOf('.');
+                    if (indexDot >= 0 && rawNumber.length - indexDot > 2) {
+                        break;
+                    }
+                    newNumber = rawNumber + val;
+                    break;
+            }
+
+            yield put({
+                type: 'save',
+                payload: {
+                    number: newNumber,
+                },
+            });
+        },
     },
     subscriptions: {
-      setup({ dispatch, history }) {
-        return history.listen(({ pathname, query }) => {
-          if (pathname === '/keyBoard') {
-            dispatch({ type: 'fetch', payload: { query } });
-          }
-        });
-      },
+
     },
-  };
-  
+};

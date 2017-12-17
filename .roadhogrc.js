@@ -13,8 +13,8 @@ export default {
         [
           'import',
           {
-            libraryName: 'antd',
-            style: 'css'
+            libraryName: 'antd-mobile',
+            style: true
           }
         ]
       ]
@@ -26,8 +26,8 @@ export default {
         [
           'import',
           {
-            libraryName: 'antd',
-            style: 'css'
+            libraryName: 'antd-mobile',
+            style: true
           }
         ]
       ]
@@ -38,8 +38,8 @@ export default {
         [
           'import',
           {
-            libraryName: 'antd',
-            style: 'css'
+            libraryName: 'antd-mobile',
+            style: true
           }
         ]
       ]

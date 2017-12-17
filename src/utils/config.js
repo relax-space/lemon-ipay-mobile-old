@@ -25,7 +25,7 @@ export const backendAddr = (() => {
       alNotifyUrl: 'https://staging.p2shop.cn/ipay/v3/al/notify',
       myUrl: 'https://ipay-staging.p2shop.cn/#/prepay',
       wxNotifyUrl: 'https://staging.p2shop.cn/ipay/v3/wx/notify',
-      tokenUrl:'https://staging.p2shop.cn/tokenfw/v1',
+      tokenUrl:'https://gateway.p2shop.cn/weixin/token-fwwx-api/v1',
       productUrl:'https://staging.p2shop.cn/bmapping/v2',
     };
     // case 'production': return {

@@ -61,50 +61,51 @@ export default {
             };
             let myUrl = encodeURIComponent(backendAddr.myUrl);
             let attach = encodeURIComponent("e_id||||" + product.e_id.toString())
-            let prepayParam = { "attach": attach, "page_url": myUrl, "e_id": product.e_id, "body": product.name, "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl }
+            let prepayParam = { "attach": attach, "page_url": myUrl, "e_id": product.e_id, "body": product.name, "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.wxNotifyUrl }
+            console.log(JSON.stringify(prepayParam))
             window.location = backendAddr.wxPrepay + '?&prepay_param=' + JSON.stringify(prepayParam);
         },
         *prepayWxTwo({ payload: { param } }, { call, put }) {
-             let url = window.location.href;
-             const { data } = yield call(payService.getToken,{param});
-             let token = data.result.api_Ticket;
-             url = location.href.split('#')[0]
-             let signature = sign(token, url)
-             wx.config({
-                 //debug: true,
-                 appId: param.appId, 
-                 timestamp: signature.timestamp, 
-                 nonceStr: signature.nonceStr, 
-                 signature: signature.signature,
-                 jsApiList: ['chooseWXPay']
-             });
-             wx.error(function (res) {
-                 alert(JSON.stringify(res))
-             })
-             wx.ready(function () {
-                 wx.chooseWXPay({
-                     appId: param.appId,
-                     timestamp: param.timeStamp, 
-                     nonceStr: param.nonceStr, 
-                     package: param.package, 
-                     signType: param.signType, 
-                     paySign: param.pay_sign, 
-                     success: function (res) {
-                         
-                     },
-                     fail: function (res) {
-                         console.log(res);
-                     },
-                     complete: function () {
-                         wx.closeWindow();
-                     }
-                 });
- 
-             });
- 
+            let url = window.location.href;
+            const { data } = yield call(payService.getToken, { param });
+            let token = data.result.api_Ticket;
+            url = location.href.split('#')[0]
+            let signature = sign(token, url)
+            wx.config({
+                //debug: true,
+                appId: param.appId,
+                timestamp: signature.timestamp,
+                nonceStr: signature.nonceStr,
+                signature: signature.signature,
+                jsApiList: ['chooseWXPay']
+            });
+            wx.error(function (res) {
+                alert(JSON.stringify(res))
+            })
+            wx.ready(function () {
+                wx.chooseWXPay({
+                    appId: param.appId,
+                    timestamp: param.timeStamp,
+                    nonceStr: param.nonceStr,
+                    package: param.package,
+                    signType: param.signType,
+                    paySign: param.pay_sign,
+                    success: function (res) {
+
+                    },
+                    fail: function (res) {
+                        console.log(res);
+                    },
+                    complete: function () {
+                        wx.closeWindow();
+                    }
+                });
+
+            });
+
         },
     },
     subscriptions: {
-      
+
     },
 };

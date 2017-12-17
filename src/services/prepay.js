@@ -42,7 +42,7 @@ export function prepayAl({ product, payAmt }) {
 //     };
 //     let myUrl = encodeURIComponent(backendAddr.myUrl);
 //     let attach = encodeURIComponent("e_id||||" + product.e_id.toString())
-//     let prepayParam = { "attach": attach, "page_url": myUrl, "e_id": product.e_id, "body": product.name, "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl }
+//     let prepayParam = { "attach": attach, "page_url": myUrl, "e_id": product.e_id, "body": product.name, "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.wxNotifyUrl }
 //     window.location = backendAddr.wxPrepay + '?&prepay_param=' + JSON.stringify(prepayParam);
 // }
 

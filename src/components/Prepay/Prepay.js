@@ -2,8 +2,11 @@ import React from 'react'
 import { connect } from 'dva'
 import styles from './Prepay.less'
 import KeyboardComponent from '../Keyboard/Keyboard'
+import { Toast } from 'antd-mobile';
 
 function Prepay({ dispatch, number, payType, product }) {
+
+
     function getQueryString(name) {
         let index = window.location.href.indexOf('?');
         let search = window.location.href.substr(index + 1)
@@ -79,14 +82,15 @@ function Prepay({ dispatch, number, payType, product }) {
         }
     } else if (UA.match(/Alipay/i)) {
         options.uaType = 'al'
-    }else{
+    }
+    else {
         return (
             <div></div>
         )
     }
 
     let product_id = getQueryString("product_id")
-    if (product_id!=null && !product.e_id) {
+    if (product_id != null && !product.e_id) {
         dispatch({
             type: "prepay/queryProduct",
             payload: { product_id: product_id, payType: options.uaType }

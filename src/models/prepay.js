@@ -37,7 +37,6 @@ export default {
         },
         *queryProduct({ payload: { product_id, payType } }, { call, put }) {
             const { data } = yield call(payService.queryProduct, { product_id });
-            console.log(data)
             if (data && data.success) {
                 yield put({
                     type: 'fetchProduct',
@@ -62,13 +61,13 @@ export default {
             let myUrl = encodeURIComponent(backendAddr.myUrl);
             let attach = encodeURIComponent("e_id||||" + product.e_id.toString())
             let prepayParam = { "attach": attach, "page_url": myUrl, "e_id": product.e_id, "body": product.name, "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.wxNotifyUrl }
-            console.log(JSON.stringify(prepayParam))
             window.location = backendAddr.wxPrepay + '?&prepay_param=' + JSON.stringify(prepayParam);
         },
+
         *prepayWxTwo({ payload: { param } }, { call, put }) {
             let url = window.location.href;
             const { data } = yield call(payService.getToken, { param });
-            let token = data.result.api_Ticket;
+            let token = data.result.api_ticket;
             url = location.href.split('#')[0]
             let signature = sign(token, url)
             wx.config({

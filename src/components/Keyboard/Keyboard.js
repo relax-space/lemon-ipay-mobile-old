@@ -39,6 +39,8 @@ function Keyboard(props, { number }) {
         }
     }
     const numberClick = numberClickHandler.bind(this)
+    const dClick = numberClickHandler.bind(this, null, 'd')
+    const hClick = numberClickHandler.bind(this, null, 'h')
     let itemStyle =cs({ 'am-number-keyboard-item': true })
     let keyStyle=cs({ "am-number-keyboard-item": true, "keyboard-hide": true })
     let wrapper =cs({ 'am-number-keyboard-wrapper': true })
@@ -51,7 +53,7 @@ function Keyboard(props, { number }) {
                             <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>1</a></td>
                             <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>2</a></td>
                             <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>3</a></td>
-                            <td onClick={numberClickHandler.bind(this, null, 'd')} className={itemStyle}><a className={styles.btnD} >
+                            <td onClick={dClick} className={itemStyle}><a className={styles.btnD} >
                                 <img style={{ "verticalAlign": "middle" }} src={require('../../assets/backspace.png')} /></a></td>
                         </tr>
                         <tr>
@@ -70,7 +72,7 @@ function Keyboard(props, { number }) {
                             <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>9</a></td>
                         </tr>
                         <tr>
-                            <td onClick={numberClickHandler.bind(this, null, 'h')} className={keyStyle}></td>
+                            <td onClick={hClick} className={keyStyle}></td>
                             <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>0</a></td>
                             <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>.</a></td>
                         </tr>

@@ -30,6 +30,7 @@ function Keyboard(props, { number }) {
                     break
                 }
                 newNumber = rawNumber + val
+                newNumber=parseFloat(newNumber)+""
                 break
         }
         if (newNumber==""){

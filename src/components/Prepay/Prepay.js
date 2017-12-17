@@ -75,6 +75,9 @@ function Prepay({ dispatch, number, product , payType}) {
                 type: "prepay/prepayWxTwo",
                 payload: { param }
             })
+            return (
+                <div></div>
+            )
         }
     } else if (UA.match(/Alipay/i)) {
         options.uaType = 'al'

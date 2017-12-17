@@ -1,5 +1,6 @@
 import * as payService from '../services/prepay';
 import { backendAddr } from '../utils/config';
+import sign from '../utils/sign';
 export default {
     namespace: 'prepay',
     state: {

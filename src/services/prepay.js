@@ -48,13 +48,14 @@ export function prepayAl({ product, payAmt }) {
 
 
 export function getToken({param}) {
+    let token =param.jwtToken
     return request(backendAddr.tokenUrl+`/tickets/${param.appId}`
         ,
         {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization':'Bearer '+`${param.jwtToken}`
+                'Authorization':'Bearer '+token
             },
         }
     );

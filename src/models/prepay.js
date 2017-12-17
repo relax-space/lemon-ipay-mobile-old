@@ -55,7 +55,14 @@ export default {
             }
         },
         *prepayWx({ payload: { product, payAmt } }, { call, put }) {
-            yield call(payService.prepayWx, { product, payAmt });
+            let headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            };
+            let myUrl = encodeURIComponent(backendAddr.myUrl);
+            let attach = encodeURIComponent("e_id||||" + product.e_id.toString())
+            let prepayParam = { "attach": attach, "page_url": myUrl, "e_id": product.e_id, "body": product.name, "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl }
+            window.location = backendAddr.wxPrepay + '?&prepay_param=' + JSON.stringify(prepayParam);
         },
         *prepayWxTwo({ payload: { param } }, { call, put }) {
              let url = window.location.href;

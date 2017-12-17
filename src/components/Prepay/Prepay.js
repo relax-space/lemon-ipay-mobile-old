@@ -4,7 +4,7 @@ import styles from './Prepay.less'
 import KeyboardComponent from '../Keyboard/Keyboard'
 import { Toast } from 'antd-mobile';
 
-function Prepay({ dispatch, number, payType, product }) {
+function Prepay({ dispatch, number, product , payType}) {
 
 
     function getQueryString(name) {
@@ -80,7 +80,7 @@ function Prepay({ dispatch, number, payType, product }) {
                 <div></div>
             )
         }
-    } else if (UA.match(/Alipay\//i)) {
+    } else if (UA.match(/Alipay/i)) {
         options.uaType = 'al'
     }
     else {
@@ -116,7 +116,7 @@ function Prepay({ dispatch, number, payType, product }) {
     );
 }
 function mapStateToProps(state) {
-    const { number, product } = state.prepay
-    return { number, product }
+    const { number, product,payType } = state.prepay
+    return { number, product,payType }
 }
 export default connect(mapStateToProps)(Prepay)

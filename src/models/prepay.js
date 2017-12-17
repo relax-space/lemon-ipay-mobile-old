@@ -59,7 +59,7 @@ export default {
         },
         *prepayWxTwo({ payload: { param } }, { call, put }) {
              let url = window.location.href;
-             const { data } = yield call(payService.getToken,{jwtToken:param.jwtToken});
+             const { data } = yield call(payService.getToken,{param});
              let token = data.result.api_Ticket;
              url = location.href.split('#')[0]
              let signature = sign(token, url)

@@ -30,7 +30,7 @@ function Prepay({ dispatch, number,first,product }) {
         console.log(number)
         dispatch({
             type:"prepay/prepayAl",
-            payload:{product,number}
+            payload:{product,payAmt:number}
         })
     }
 
@@ -39,14 +39,12 @@ function Prepay({ dispatch, number,first,product }) {
         btnName: "支付",
         max: 10000
     }
-    let uaType ='wx'
+    options.uaType='wx'
     let UA = navigator.userAgent;
     if  (UA.match(/MicroMessenger\//i)){
         options.uaType='wx'
 
     }else if (UA.match(/Alipay/i)){
-        options.uaType='al'
-    }else{
         options.uaType='al'
     }
 
@@ -62,8 +60,8 @@ function Prepay({ dispatch, number,first,product }) {
             <div className={styles.topDiv}>
                 <img className={styles.logo} src={product.logo_url} />
             </div>
-            <div>
-                <span className={styles.shopName}></span>
+            <div className={styles.topDiv}>
+                <span className={styles.shopName}>{product.name}</span>
             </div>
             <div className={options.uaType=="wx"?styles.divInputWX:styles.divInputAL}>
                 <span className={styles.spanLabel}>消费金额</span>

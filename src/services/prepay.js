@@ -26,7 +26,7 @@ export function prepayAl({ product,payAmt }) {
             body: JSON.stringify({
                 "e_id": product.e_id,
                 "subject": product.name,
-                "total_amount": payAmt,
+                "total_amount":parseFloat(payAmt),
                 "notify_url":backendAddr.alNotifyUrl,
                 "body":"e_id||||"+encodeURIComponent(product.e_id.toString())
             })

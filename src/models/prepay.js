@@ -4,18 +4,18 @@ export default {
     namespace: 'prepay',
     state: {
         number: '',
-        first:true,
-        product:{},
+        product: {},
+        payType: "",
     },
     reducers: {
         save(state, { payload: { number } }) {
             return { ...state, number };
         },
-        loadfirst(state, { payload: { first } }) {
-            return { ...state, first };
+        savePayType(state, { payload: { payType } }) {
+            return { ...state, payType };
         },
-        fetchProduct(state, { payload: { product} }) {
-            return { ...state, product };
+        fetchProduct(state, { payload: { product, payType } }) {
+            return { ...state, product, payType };
         },
     },
     effects: {
@@ -27,41 +27,84 @@ export default {
                 },
             });
         },
-        *load({ payload: { first } }, { call, put }) {
+        *payType({ payload: { payType } }, { call, put }) {
             yield put({
-                type: 'loadfirst',
+                type: 'savePayType',
                 payload: {
-                    first: first,
+                    payType: payType,
                 },
             });
         },
-        *queryProduct({ payload: { product_id } }, { call, put }) {
+        *queryProduct({ payload: { product_id, payType } }, { call, put }) {
             const { data } = yield call(payService.queryProduct, { product_id });
             console.log(data)
-            if (data &&data.success){
+            if (data && data.success) {
                 yield put({
                     type: 'fetchProduct',
                     payload: {
                         product: data.result,
+                        payType: payType,
                     },
                 });
             }
         },
-        *prepayAl({ payload: { product,payAmt } }, { call, put }) {
-            const { data } = yield call(payService.prepayAl, { product,payAmt });
-            if (data &&data.success){
+        *prepayAl({ payload: { product, payAmt } }, { call, put }) {
+            const { data } = yield call(payService.prepayAl, { product, payAmt });
+            if (data && data.success) {
                 window.location = data.result.qr_code;
             }
+        },
+        *prepayWx({ payload: { product, payAmt } }, { call, put }) {
+            yield call(payService.prepayWx, { product, payAmt });
+        },
+        *prepayWxTwo({ payload: { param } }, { call, put }) {
+             let url = window.location.href;
+             const { data } = yield call(payService.getToken,{jwtToken:param.jwtToken});
+             let token = data.result.api_Ticket;
+             url = location.href.split('#')[0]
+             let signature = sign(token, url)
+             wx.config({
+                 //debug: true,
+                 appId: param.appId, 
+                 timestamp: signature.timestamp, 
+                 nonceStr: signature.nonceStr, 
+                 signature: signature.signature,
+                 jsApiList: ['chooseWXPay']
+             });
+             wx.error(function (res) {
+                 alert(JSON.stringify(res))
+             })
+             wx.ready(function () {
+                 wx.chooseWXPay({
+                     appId: param.appId,
+                     timestamp: param.timeStamp, 
+                     nonceStr: param.nonceStr, 
+                     package: param.package, 
+                     signType: param.signType, 
+                     paySign: param.pay_sign, 
+                     success: function (res) {
+                         
+                     },
+                     fail: function (res) {
+                         console.log(res);
+                     },
+                     complete: function () {
+                         wx.closeWindow();
+                     }
+                 });
+ 
+             });
+ 
         },
     },
     subscriptions: {
         setup({ dispatch, history }) {
-          return history.listen(({ pathname, search }) => {
-            const query = queryString.parse(search);
-            if (pathname === '/queryProduct') {
-              dispatch({ type: 'queryProduct', payload: query });
-            }
-          });
+            return history.listen(({ pathname, search }) => {
+                const query = queryString.parse(search);
+                if (pathname === '/queryProduct') {
+                    dispatch({ type: 'queryProduct', payload: query });
+                }
+            });
         },
-      },
+    },
 };

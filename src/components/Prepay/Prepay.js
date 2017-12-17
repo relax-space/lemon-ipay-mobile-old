@@ -3,8 +3,8 @@ import { connect } from 'dva'
 import styles from './Prepay.less'
 import KeyboardComponent from '../Keyboard/Keyboard'
 
-function Prepay({ dispatch, number,first,product }) {
-     function getQueryString(name) {
+function Prepay({ dispatch, number, payType, product }) {
+    function getQueryString(name) {
         let index = window.location.href.indexOf('?');
         let search = window.location.href.substr(index + 1)
         let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -19,6 +19,21 @@ function Prepay({ dispatch, number,first,product }) {
         }
         return null;
     }
+    function getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+    function deleteAllCookies() {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;domain=.p2shop.cn;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    }
+
     function changeNumber(numb) {
         dispatch({
             type: "prepay/addAmt",
@@ -27,11 +42,17 @@ function Prepay({ dispatch, number,first,product }) {
     }
 
     function showTotalAmt() {
-        console.log(number)
-        dispatch({
-            type:"prepay/prepayAl",
-            payload:{product,payAmt:number}
-        })
+        if (payType == "al") {
+            dispatch({
+                type: "prepay/prepayAl",
+                payload: { product, payAmt: number }
+            })
+        } else {
+            dispatch({
+                type: "prepay/prepayWx",
+                payload: { product, payAmt: number }
+            })
+        }
     }
 
     let options = {
@@ -39,20 +60,37 @@ function Prepay({ dispatch, number,first,product }) {
         btnName: "支付",
         max: 10000
     }
-    options.uaType='wx'
+    options.uaType = 'wx'
     let UA = navigator.userAgent;
-    if  (UA.match(/MicroMessenger\//i)){
-        options.uaType='wx'
-
-    }else if (UA.match(/Alipay/i)){
-        options.uaType='al'
+    if (UA.match(/MicroMessenger\//i)) {
+        options.uaType = 'wx'
+        let cookie = getCookie('IPAY_WECHAT_PREPAY');
+        if (cookie) {
+            let param = JSON.parse(decodeURIComponent(cookie))
+            deleteAllCookies();
+            dispatch({
+                type: "prepay/prepayWxTwo",
+                payload: { param }
+            })
+            Toast.loading('支付中...');
+            return (
+                <div></div>
+            )
+        }
+    } else if (UA.match(/Alipay/i)) {
+        options.uaType = 'al'
     }
+    // else{
+    //     return (
+    //         <div></div>
+    //     )
+    // }
 
-    if (!product.e_id){
-        let product_id = getQueryString("product_id") 
+    if (!product.e_id) {
+        let product_id = getQueryString("product_id")
         dispatch({
             type: "prepay/queryProduct",
-            payload: { product_id:product_id}
+            payload: { product_id: product_id, payType: options.uaType }
         })
     }
     return (
@@ -63,9 +101,9 @@ function Prepay({ dispatch, number,first,product }) {
             <div className={styles.topDiv}>
                 <span className={styles.shopName}>{product.name}</span>
             </div>
-            <div className={options.uaType=="wx"?styles.divInputWX:styles.divInputAL}>
+            <div className={options.uaType == "wx" ? styles.divInputWX : styles.divInputAL}>
                 <span className={styles.spanLabel}>消费金额</span>
-                <span className={options.uaType=="wx"?styles.heartWX:styles.heartAL}>|</span>
+                <span className={options.uaType == "wx" ? styles.heartWX : styles.heartAL}>|</span>
                 <span className={styles.spanAmt}>{number}</span>
                 <span className={styles.spanSymbel}>&yen;&nbsp;</span>
             </div>
@@ -75,7 +113,7 @@ function Prepay({ dispatch, number,first,product }) {
     );
 }
 function mapStateToProps(state) {
-    const { number,first ,product} = state.prepay
-    return { number,first,product }
+    const { number, product } = state.prepay
+    return { number, product }
 }
 export default connect(mapStateToProps)(Prepay)

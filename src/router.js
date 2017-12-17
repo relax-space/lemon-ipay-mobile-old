@@ -8,6 +8,7 @@ function RouterConfig({ history }) {
     <Router history={history}>
       <Switch>
       <Route path="/" exact component={PrepayComponent} />
+      <Route path="/prepay" exact component={PrepayComponent} />
       <Route path="/test"  component={TestKeyboardComponent} />
       </Switch>
     </Router>

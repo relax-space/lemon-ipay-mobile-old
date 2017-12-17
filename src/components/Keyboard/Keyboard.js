@@ -38,33 +38,43 @@ function Keyboard(props, { number }) {
             props.changeNumber(newNumber)
         }
     }
+    const numberClick = numberClickHandler.bind(this)
+    const dClick = numberClickHandler.bind(this, null, 'd')
+    const hClick = numberClickHandler.bind(this, null, 'h')
+    let itemStyle =cs({ 'am-number-keyboard-item': true })
+    let keyStyle=cs({ "am-number-keyboard-item": true, "keyboard-hide": true })
+    let wrapper =cs({ 'am-number-keyboard-wrapper': true })
     return (
         <div id="am-number-keyboard-container" >
-            <div data-reactroot="" className={cs({ 'am-number-keyboard-wrapper': true })} style={{ "height": "240px" }} >
+            <div data-reactroot="" className={wrapper} style={{ "height": "240px" }} >
                 <table>
                     <tbody>
                         <tr>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>1</a></td>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>2</a></td>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>3</a></td>
-                            <td onClick={numberClickHandler.bind(this, null, 'd')} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btnD} >
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>1</a></td>
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>2</a></td>
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>3</a></td>
+                            <td onClick={dClick} className={itemStyle}><a className={styles.btnD} >
                                 <img style={{ "verticalAlign": "middle" }} src={require('../../assets/backspace.png')} /></a></td>
                         </tr>
                         <tr>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>4</a></td>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>5</a></td>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>6</a></td>
-                            <td onClick={e => { props.onClick() }} rowSpan="3"><a className={props.options.uaType=="wx"?styles.btnWX:styles.btnAL}>{props.options.btnName}</a></td>
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>4</a></td>
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>5</a></td>
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>6</a></td>
+                            <td onClick={() => {
+                                if (props.options.number){
+                                    props.onClick()
+                                }
+                             }} rowSpan="3"><a className={props.options.uaType=="wx"?styles.btnWX:styles.btnAL}>{props.options.btnName}</a></td>
                         </tr>
                         <tr>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>7</a></td>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>8</a></td>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>9</a></td>
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>7</a></td>
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>8</a></td>
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>9</a></td>
                         </tr>
                         <tr>
-                            <td onClick={numberClickHandler.bind(this, null, 'h')} className={cs({ "am-number-keyboard-item": true, "keyboard-hide": true })}></td>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>0</a></td>
-                            <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>.</a></td>
+                            <td onClick={hClick} className={keyStyle}></td>
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>0</a></td>
+                            <td onClick={numberClick} className={itemStyle}><a className={styles.btn}>.</a></td>
                         </tr>
                     </tbody>
                 </table>

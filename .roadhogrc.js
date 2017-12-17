@@ -14,7 +14,7 @@ export default {
           'import',
           {
             libraryName: 'antd-mobile',
-            style: 'css'
+            style: true
           }
         ]
       ]
@@ -27,7 +27,7 @@ export default {
           'import',
           {
             libraryName: 'antd-mobile',
-            style: 'css'
+            style: true
           }
         ]
       ]
@@ -39,7 +39,7 @@ export default {
           'import',
           {
             libraryName: 'antd-mobile',
-            style: 'css'
+            style: true
           }
         ]
       ]

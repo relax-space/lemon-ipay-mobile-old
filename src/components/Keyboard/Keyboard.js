@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'dva'
-import styles from './Keyboard.css'
+import styles from './Keyboard.less'
 import cs from 'classnames'//引入classnames依赖库
 import 'antd-mobile/lib/input-item/style/css'
 
@@ -54,7 +54,7 @@ function Keyboard(props, { number }) {
                             <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>4</a></td>
                             <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>5</a></td>
                             <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>6</a></td>
-                            <td onClick={e => { props.onClick() }} rowSpan="3"><a className={styles.btnWX}>{props.options.btnName}</a></td>
+                            <td onClick={e => { props.onClick() }} rowSpan="3"><a className={props.options.uaType=="wx"?styles.btnWX:styles.btnAL}>{props.options.btnName}</a></td>
                         </tr>
                         <tr>
                             <td onClick={numberClickHandler.bind(this)} className={cs({ 'am-number-keyboard-item': true })}><a className={styles.btn}>7</a></td>

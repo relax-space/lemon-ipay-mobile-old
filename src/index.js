@@ -9,6 +9,7 @@ const app = dva();
 
 // 3. Model
 app.model(require("./models/testKeyboard"))
+app.model(require("./models/prepay"))
 
 
 // 4. Router

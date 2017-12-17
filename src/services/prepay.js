@@ -53,9 +53,8 @@ export function getToken({param}) {
         {
             method: 'GET',
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization':`Bearer ${param.jwtToken}`
+                'Authorization':'Bearer '+`${param.jwtToken}`
             },
         }
     );

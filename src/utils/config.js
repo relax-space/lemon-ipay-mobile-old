@@ -20,23 +20,14 @@ export const backendAddr = (() => {
       productUrl:'https://staging.p2shop.cn/bmapping/v2',
     };
     case 'production': return {
-      wxPrepay: 'https://staging.p2shop.cn/ipay/v3/wx/prepayeasy',
-      alPrepay: 'https://staging.p2shop.cn/ipay/v3/al/prepay',
-      alNotifyUrl: 'https://staging.p2shop.cn/ipay/v3/al/notify',
-      myUrl: 'https://ipay-staging.p2shop.cn/#/prepay',
-      wxNotifyUrl: 'https://staging.p2shop.cn/ipay/v3/wx/notify',
+      wxPrepay: 'https://gateway.p2shop.cn/ipay/v3/wx/prepayeasy',
+      alPrepay: 'https://gateway.p2shop.cn/ipay/v3/al/prepay',
+      alNotifyUrl: 'https://gateway.p2shop.cn/ipay/v3/al/notify',
+      myUrl: 'https://ipay.p2shop.cn/#/prepay',
+      wxNotifyUrl: 'https://gateway.p2shop.cn/ipay/v3/wx/notify',
       tokenUrl:'https://gateway.p2shop.cn/weixin/token-fwwx-api/v1',
-      productUrl:'https://staging.p2shop.cn/bmapping/v2',
+      productUrl:'https://gateway.p2shop.cn/bmapping/v2',
     };
-    // case 'production': return {
-    //   wxPrepay: 'https://gateway.p2shop.cn/ipay/v3/wx/prepayeasy',
-    //   alPrepay: 'https://gateway.p2shop.cn/ipay/v3/al/prepay',
-    //   alNotifyUrl: 'https://gateway.p2shop.cn/ipay/v3/al/notify',
-    //   myUrl: 'https://ipay.p2shop.cn/#/prepay',
-    //   wxNotifyUrl: 'https://gateway.p2shop.cn/ipay/v3/wx/notify',
-    //   tokenUrl:'https://gateway.p2shop.cn/weixin/token-fwwx-api/v1',
-    //   productUrl:'https://gateway.p2shop.cn/bmapping/v2',
-    // };
     default: return {
       wxPrepay: 'https://staging.p2shop.cn/ipay/v3/wx/prepayeasy',
       alPrepay: 'https://staging.p2shop.cn/ipay/v3/al/prepay',

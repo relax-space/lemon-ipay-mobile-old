@@ -50,7 +50,7 @@ function Prepay({ dispatch, number, product , payType}) {
                 type: "prepay/prepayAl",
                 payload: { product, payAmt: number }
             })
-        } else {
+        } else if (payType == "wx"){
             dispatch({
                 type: "prepay/prepayWx",
                 payload: { product, payAmt: number }

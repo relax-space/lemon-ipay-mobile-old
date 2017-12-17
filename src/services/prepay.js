@@ -1,6 +1,5 @@
 import request from '../utils/request';
 import { backendAddr } from '../utils/config';
-import queryString from 'query-string';
 
 export function queryProduct({ product_id }) {
     return request(backendAddr.productUrl + `/greenBiz/${product_id}`,
@@ -45,12 +44,6 @@ export function prepayAl({ product, payAmt }) {
 //     let attach = encodeURIComponent("e_id||||" + product.e_id.toString())
 //     let prepayParam = { "attach": attach, "page_url": myUrl, "e_id": product.e_id, "body": product.name, "total_fee": payAmt * 100, "trade_type": "JSAPI", "notify_url": backendAddr.notifyUrl }
 //     window.location = backendAddr.wxPrepay + '?&prepay_param=' + JSON.stringify(prepayParam);
-//     return request(backendAddr.wxPrepay + '?&prepay_param=' + JSON.stringify(prepayParam),
-//         {
-//             method: 'GET',
-//             headers: headers,
-//         }
-//     );
 // }
 
 

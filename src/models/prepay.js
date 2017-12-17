@@ -1,5 +1,5 @@
 import * as payService from '../services/prepay';
-import queryString from 'query-string';
+import { backendAddr } from '../utils/config';
 export default {
     namespace: 'prepay',
     state: {
@@ -105,13 +105,6 @@ export default {
         },
     },
     subscriptions: {
-        setup({ dispatch, history }) {
-            return history.listen(({ pathname, search }) => {
-                const query = queryString.parse(search);
-                if (pathname === '/queryProduct') {
-                    dispatch({ type: 'queryProduct', payload: query });
-                }
-            });
-        },
+      
     },
 };

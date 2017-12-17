@@ -80,7 +80,7 @@ function Prepay({ dispatch, number, payType, product }) {
                 <div></div>
             )
         }
-    } else if (UA.match(/Alipay/i)) {
+    } else if (UA.match(/Alipay\//i)) {
         options.uaType = 'al'
     }
     else {
